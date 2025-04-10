@@ -1,0 +1,55 @@
+{
+  "patient_name": "S. SIDHARTH REDDY",
+  "age": 18,
+  "gender": "M",
+  "prescription_date": "2023-08-12",
+  "doctor_name": "Dr. Mallesh",
+  "diagnosis": "Infected epidermoid cyst",
+  "disease_info": {
+    "summary": "An epidermoid cyst is a small, benign bump beneath the skin.  When infected, they become swollen, red, tender, and may drain pus. They arise from the epidermis, the outer layer of skin.",
+    "precautions": [
+      "Keep the area clean and dry.",
+      "Avoid squeezing or picking at the cyst.",
+      "Apply warm compresses to help reduce pain and swelling."
+    ]
+  },
+  "medications": [
+    {
+      "medicine_name": "Dicloxacillin",
+      "dosage": "500mg 1-0-1",
+      "duration_days": 7,
+      "total_doses": 21,
+      "purpose": "Treat the bacterial infection causing the inflammation of the cyst.",
+      "notes": "Take with food.",
+      "side_effects": [
+        "Nausea",
+        "Vomiting",
+        "Diarrhea",
+        "Allergic reactions (rash, itching, swelling)"
+      ]
+    },
+    {
+      "medicine_name": "Ibuprofen",
+      "dosage": "400mg 0-1-0 (as needed for pain)",
+      "duration_days": 7,
+      "total_doses": 7,
+      "purpose": "Pain and inflammation relief.",
+      "notes": "Take with food. Do not exceed recommended dosage.",
+      "side_effects": [
+        "Stomach upset",
+        "Heartburn",
+        "Headache",
+        "Dizziness"
+      ]
+    }
+  ],
+  "reminders": {
+    "enabled": true,
+    "times": [
+      "08:00 AM",
+      "02:00 PM",
+      "08:00 PM"
+    ]
+  },
+  "additional_notes": "Follow-up appointment recommended in 1 week. If symptoms worsen or do not improve within 7 days, contact your doctor."
+}
