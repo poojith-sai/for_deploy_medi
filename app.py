@@ -1,12 +1,12 @@
 import os
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from dotenv import load_dotenv
 from ocr_extraction import process_prescription
 
 load_dotenv()
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="dist", static_url_path="")
 CORS(app)
 
 # Ensure the uploads directory exists
@@ -22,26 +22,26 @@ def upload_file():
     if file.filename == '':
         return jsonify({"error": "No selected file"}), 400
 
-    # Save the file to the uploads directory
     file_path = os.path.join(UPLOAD_FOLDER, file.filename)
     file.save(file_path)
 
-    # Process the uploaded file using OCR
     try:
-        print(f"Processing file: {file_path}")
-        process_prescription(file_path)  # This generates `output.json`
-        
-        output_path = "output.json"
-        if not os.path.exists(output_path):
-            return jsonify({"error": "Failed to generate output file"}), 500
-            
-        with open(output_path, "r") as f:
+        process_prescription(file_path)  # this generates output.json
+        with open("output.json", "r") as f:
             extracted_data = f.read()
-        print("Successfully processed file")
         return jsonify({"message": "File uploaded and processed successfully", "data": extracted_data})
     except Exception as e:
-        print(f"Error processing file: {str(e)}")
         return jsonify({"error": str(e)}), 500
 
+# 🔥 Serve React frontend
+@app.route('/')
+def serve_index():
+    return send_from_directory(app.static_folder, 'index.html')
+
+@app.route('/<path:path>')
+def serve_react_app(path):
+    return send_from_directory(app.static_folder, path)
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=True, host='0.0.0.0', port=port)
